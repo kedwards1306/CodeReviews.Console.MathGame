@@ -1,11 +1,6 @@
 ﻿// See https://aka.ms/new-console-template for more information
 using System.Diagnostics;
 
-
-// int add = 0;
-// int substract = 0;
-// int multiply = 0;
-// int division = 0;
 List<int> pastScores = new List<int>();
 bool playAgain = true;
 
@@ -77,7 +72,7 @@ string UserChoices()
 // selection 3. - Multiplication so userInput1 * userInput2
 // selection 4. - Division so userInput1 / userInput2
 
-void Questions(string questions)
+void Questions(string question)
 {
     Random random = new Random();
     int score = 0;
@@ -87,7 +82,7 @@ void Questions(string questions)
     int num1 = random.Next(1, 10);
     int num2 = random.Next(1, 10);
     int correctAnswer = 0;
-    switch (questions)
+    switch (question)
     {
         case "1":
             Console.WriteLine($"What is {num1} + {num2}? ");
@@ -119,7 +114,7 @@ void Questions(string questions)
             Environment.Exit(1);
             break;
     }
-    bool timeUp = false;
+    
     //Timer Thread
     Stopwatch stopwatch = Stopwatch.StartNew();
     string input = Console.ReadLine();
@@ -138,7 +133,7 @@ void Questions(string questions)
             }
         });
     timerThread.Start();
-    // timerThread.Join();
+   
     stopwatch.Stop();
     
     int userResult;
