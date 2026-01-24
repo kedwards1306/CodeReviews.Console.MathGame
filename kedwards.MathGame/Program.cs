@@ -8,6 +8,10 @@ while(playAgain)
 {
     Menu();
     string choice = UserChoices();
+    if (choice == "5")
+    {
+        continue;
+    }
     Questions(choice);
     Console.WriteLine("Do you want to play again? (y/n)");
     string answer = Console.ReadLine().Trim().ToLower();
@@ -37,7 +41,7 @@ string UserChoices()
     Console.WriteLine("4. Division");
 
     string choice = Console.ReadLine();
-    
+
 
     if (choice.Trim() == "1")
     {
@@ -54,6 +58,11 @@ string UserChoices()
     else if (choice.Trim() == "4")
     {
         Division();
+    }
+
+    else if (choice.Trim() == "5")
+    {
+        ShowPastScore();
     }
     else if (choice.Trim().ToLower() == "q")
     {
@@ -117,32 +126,19 @@ void Questions(string question)
     
     //Timer Thread
     Stopwatch stopwatch = Stopwatch.StartNew();
-    string input = Console.ReadLine();
-    Thread timerThread = new Thread(() =>
-        {
-            for (int t = timeLimitSeconds; t > 0; t--)
-            {
-                if (stopwatch.Elapsed.TotalSeconds >= timeLimitSeconds)
-                {
-                    Console.WriteLine("Time's up!");
-                    Console.WriteLine($"The correct answer was {correctAnswer}");
-                    continue;
-                }
-               
-                Thread.Sleep(1000);
-            }
-        });
-    timerThread.Start();
-   
-    stopwatch.Stop();
-    
+        string input = Console.ReadLine();
+        stopwatch.Stop();
+    if (stopwatch.Elapsed.TotalSeconds > timeLimitSeconds)
+    {
+            Console.WriteLine("Time's up!");
+            Console.WriteLine($"The correct answer was {correctAnswer}");
+    }
     int userResult;
     bool validInput = int.TryParse(input, out userResult);
     if (validInput && userResult == correctAnswer)
     {
         Console.WriteLine("Your answer is correct");
         score++;
-
     }
     else
     {
@@ -174,9 +170,6 @@ void Division()
 
 void ShowPastScore()
 {
-    bool seeScore = true;
-    while (seeScore)
-    {
         Console.WriteLine("Do you want to see your past scores? (y/n)");
         string input = Console.ReadLine();
         if (input == "y")
@@ -187,14 +180,4 @@ void ShowPastScore()
                 Console.WriteLine($"Game {i + 1}: {pastScores[i]} / 5");
             }
         }
-        else if (input == "n")
-        {
-            seeScore = false;
-            return;
-        }
-        else
-        {
-            Console.WriteLine("Invalid input");
-        }
-    }
 }
