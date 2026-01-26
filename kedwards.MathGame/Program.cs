@@ -107,12 +107,11 @@ void Questions(string question)
             correctAnswer = num1 * num2;
             break;
         case "4":
-        while (num2 == 0)
-        {
-            num2 = random.Next(1, 10);
-        }
-            correctAnswer = num1 / num2;
-             Console.WriteLine($"What is {num1} / {num2}? ");
+            num2 = random.Next(1, 11);
+            int quotient = random.Next(0, 11);
+            num1 = num2 * quotient;
+            correctAnswer = quotient;
+            Console.WriteLine($"What is {num1} / {num2}? ");
             break;
             
             case "q":
